@@ -36,35 +36,57 @@ export const signup = async (req, res) => {
       profilePic: gender === "male" ? boyProfilePic : girlProfilePic,
     });
 
-    if(newuser){
-        await newuser.save();
-        generateTokenAndSetCookie(newuser._id,res)
-
-        res.status(201).json({
-            _id: newuser._id,
-            username: newuser.username,
-            fullName: newuser.fullName,
-            profilePic: newuser.profilePic,
-        });
-    }else {
-        res.status(400).json({ error: "Failed to create user" });
+    if (newuser) {
+      await newuser.save();
+      generateTokenAndSetCookie(newuser._id, res);
+      res.status(201).json({
+        _id: newuser._id,
+        username: newuser.username,
+        fullName: newuser.fullName,
+        profilePic: newuser.profilePic,
+      });
+    } else {
+      res.status(400).json({ error: "Failed to create user" });
     }
-    
-
-
   } catch (error) {
     console.log(error.message);
-    
+
     return res.status(500).json({ error: "Internal server error" });
   }
 };
 
-export const login = (req, res) => {
-  console.log("login");
-  // Continue with login logic here...
+export const login = async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      user?.password || ""
+    );
+    if (!user || !isPasswordCorrect) {
+      return res.status(400).json({ error: "Invalid Credentials" });
+    }
+    generateTokenAndSetCookie(user._id, res);
+    res.status(200).json({
+      _id: user._id,
+      username: user.username,
+      fullName: user.fullName,
+      profilePic: user.profilePic,
+    });
+  } catch (error) {
+    console.log(error.message);
+
+    return res.status(500).json({ error: "Internal server error" });
+  }
 };
 
 export const logout = (req, res) => {
-  console.log("logout");
-  // Continue with logout logic here...
+  try{
+res.cookie("jwt", "", {maxAge:0});
+res.status(200).json({message:"Logged Out Sucessfully"})
+  }
+  catch (error) {
+    console.log(error.message);
+    return res.status(500).json({ error: "Internal server error" });
+  }
 };
