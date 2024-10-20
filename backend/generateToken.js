@@ -5,7 +5,7 @@ const generateTokenAndSetCookie = (userId, res) => {
   const token = jwt.sign({userId }, process.env.JWT_SECRET, { expiresIn: "15d" });
 
   // Set the token in an HTTP-only cookie, expires in 15 days
-  res.cookie("token", token, {
+  res.cookie("jwt", token, {
     httpOnly: true,
     maxAge: 15 * 24 * 60 * 60 * 1000,
     sameSite: "strict", // Prevent CSRF attacks by allowing cookies only from the same site
