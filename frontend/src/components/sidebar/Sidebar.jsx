@@ -1,11 +1,10 @@
-import React from 'react'
+import React from 'react';
 
 const Sidebar = () => {
   return (
-    <div className='bg-zinc-950'>
-      
+<div className="flex-1 h-screen text-white    overflow-y-scroll no-scrollbar p-4"> 
     </div>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;

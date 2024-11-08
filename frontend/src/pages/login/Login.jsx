@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Eye, EyeOff, Mail } from "lucide-react";
-
+import logo from "../../assets/logo.png";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -13,13 +13,9 @@ const Login = () => {
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <a
             href="#"
-            class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
+            class=" mr-12 flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
           >
-            <img
-              class="w-8 h-8 mr-2"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
-              alt="logo"
-            />
+            <img src={logo} alt="Logo" className="h-16 w-16" />
             Login
           </a>
           <div class="w-full rounded-lg    md:mt-0 sm:max-w-md xl:p-0 bg-zinc-900">
@@ -28,7 +24,7 @@ const Login = () => {
                 Login to your account
               </h1>
               <form class="space-y-4 md:space-y-6" action="#">
-              <div>
+                <div>
                   <label
                     htmlFor="email"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"

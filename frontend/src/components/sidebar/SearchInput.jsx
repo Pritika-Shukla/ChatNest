@@ -2,9 +2,9 @@ import React from "react";
 import logo from "../../assets/logo.png"
 const SearchInput = () => {
   return (
-    <div class="w-full max-w-md min-w-[400px ] h-screen  border-r-2 border-neutral-900">
+    <div class="w-full max-w-md min-w-[400px ] h-screen border-r-2 border-neutral-800 flex-shrink-0   overflow-y-scroll no-scrollbar">
       <div className="flex items-center">
-      <img src={logo} alt="Logo" className="h-20 w-20" />
+      <img src={logo} alt="Logo" className="h-18  w-20" />
         <p className="font-bold text-xl text-white">ChatNest</p>
       </div>
 
@@ -34,6 +34,8 @@ const SearchInput = () => {
           Search
         </button>
       </div>
+      <div className=" border-b-2 mt-4 border-neutral-800 opacity-55"></div>
+      
     </div>
   );
 };
