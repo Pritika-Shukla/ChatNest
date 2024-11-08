@@ -3,7 +3,7 @@ import logo from "../../assets/logo.png";
 
 const SearchInput = () => {
   return (
-    <div className="w-full max-w-md min-w-[400px] h-screen border-r-2 border-neutral-800 flex-shrink-0 relative">
+    <div className="w-full max-w-md min-w-[400px] h-full border-r-2 border-neutral-800 flex-shrink-0 relative overflow-y-auto pr-4 pl-4">
       <div className="sticky top-0 bg-inherit z-10">
         <div className="flex items-center">
           <img src={logo} alt="Logo" className="h-18 w-20" />
@@ -39,7 +39,7 @@ const SearchInput = () => {
         <div className="border-b-2 border-neutral-800 opacity-55"></div>
       </div>
 
-      <div className="overflow-y-auto h-[calc(100vh-140px)] scrollbar-hide">
+      <div className="overflow-y-auto h-[calc(100vh-140px)] scrollbar-hide text-white">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui tempora
         atque eligendi assumenda saepe sit, excepturi error blanditiis dicta
         accusamus facere soluta consectetur incidunt. Perferendis delectus

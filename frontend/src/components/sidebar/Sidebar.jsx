@@ -3,8 +3,9 @@ import GlobeDemo from '../../pages/NN';
 
 const Sidebar = () => {
   return (
-<div className="flex-1 h-screen text-white  overflow-y-auto no-scrollbar p-4"> 
+<div className="flex-1 h-full text-white  bg-inherit z-10  p-4"> 
   <GlobeDemo/>
+  dgnekjgnejgbjk
     </div>
   );
 };
