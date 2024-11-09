@@ -5,7 +5,7 @@ import { World } from "../components/ui/Globe";
 export function GlobeDemo() {
   const globeConfig = {
     pointSize: 4,
-    globeColor: "#000000",
+    globeColor: "#111111",
     showAtmosphere: true,
     atmosphereColor: "#FFFFFF",
     atmosphereAltitude: 0.1,

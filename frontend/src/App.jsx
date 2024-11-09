@@ -6,7 +6,7 @@ import Login from './pages/login/Login'
 import Signup from './pages/signup/SignUp'
 import SearchInput from './components/sidebar/SearchInput'
 import Home from './pages/home/Home'
-import GlobeDemo from './pages/NN'
+import GlobeDemo from './pages/GlobeDemo'
 
 function App() {
   const [count, setCount] = useState(0)
