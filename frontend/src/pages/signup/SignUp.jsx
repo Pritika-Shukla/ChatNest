@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Eye, EyeOff, Mail, UserRoundPen } from "lucide-react";
 import logo from "../../assets/logo.png";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -13,7 +14,19 @@ const Signup = () => {
   function toggleConfirmPasswordVisibility() {
     setShowConfirmPassword((prevState) => !prevState);
   }
+  const [inputs, setInputs] = useState({
+    fullName: "",
+    username: "",
+    password: "",
+    confirmPassword: "",
+    gender: "",
+  });
 
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    console.log(inputs);
+    await signup(inputs)
+  };
   return (
     <div>
       <section className="bg-zinc-950">
@@ -22,8 +35,7 @@ const Signup = () => {
             href="#"
             className="flex items-center mb-2 mr-14 text-2xl font-semibold text-gray-900 dark:text-white"
           >
-                 <img src={logo} alt="Logo" className="h-16 w-16" />
-
+            <img src={logo} alt="Logo" className="h-16 w-16" />
             Signup
           </a>
           <div className="w-full rounded-lg md:mt-0 sm:max-w-md xl:p-0 bg-zinc-900">
@@ -31,7 +43,11 @@ const Signup = () => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Signup to your account
               </h1>
-              <form className="space-y-4 md:space-y-6" action="#">
+              <form
+                className="space-y-4 md:space-y-6"
+                action="#"
+                onSubmit={handleSubmit}
+              >
                 <div>
                   <label
                     htmlFor="full-name"
@@ -47,25 +63,33 @@ const Signup = () => {
                       className="bg-zinc-700 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Enter your fullname"
                       required
+                      value={inputs.fullName}
+                      onChange={(e) =>
+                        setInputs({ ...inputs, fullName: e.target.value })
+                      }
                     />
                     <UserRoundPen className="absolute inset-y-0 right-0 flex items-center cursor-pointer mr-2 mt-3 text-gray-400" />
                   </div>
                 </div>
                 <div>
                   <label
-                    htmlFor="email"
+                    htmlFor="username"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Your email
+                    Username
                   </label>
                   <div className="relative">
                     <input
-                      type="email"
-                      name="email"
-                      id="email"
+                      type="username"
+                      name="username"
+                      id="username"
                       className="bg-zinc-700 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="name@company.com"
+                      placeholder="JohnDoe"
                       required
+                      value={inputs.username}
+                      onChange={(e) =>
+                        setInputs({ ...inputs, username: e.target.value })
+                      }
                     />
                     <Mail className="absolute inset-y-0 right-0 flex items-center cursor-pointer mr-2 mt-3 text-gray-400"></Mail>
                   </div>
@@ -85,6 +109,10 @@ const Signup = () => {
                       placeholder="••••••••"
                       className="border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-zinc-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       required
+                      value={inputs.password}
+                      onChange={(e) =>
+                        setInputs({ ...inputs, password: e.target.value })
+                      }
                     />
                     <div
                       className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
@@ -113,6 +141,13 @@ const Signup = () => {
                       placeholder="••••••••"
                       className="border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-zinc-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       required
+                      value={inputs.confirmPassword}
+                      onChange={(e) =>
+                        setInputs({
+                          ...inputs,
+                          confirmPassword: e.target.value,
+                        })
+                      }
                     />
                     <div
                       className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
@@ -127,9 +162,9 @@ const Signup = () => {
                   </div>
                 </div>
                 <div className="mt-4">
-                  <span className="block mb-2 text-sm font-medium  text-white">
+                  <label className="block mb-2 text-sm font-medium text-white">
                     Gender
-                  </span>
+                  </label>
                   <div className="mt-2">
                     <label className="inline-flex items-center">
                       <input
@@ -137,6 +172,10 @@ const Signup = () => {
                         className="form-radio"
                         name="gender"
                         value="male"
+                        checked={inputs.gender === "male"}
+                        onChange={(e) =>
+                          setInputs({ ...inputs, gender: e.target.value })
+                        }
                       />
                       <span className="ml-2 text-white">Male</span>
                     </label>
@@ -146,18 +185,26 @@ const Signup = () => {
                         className="form-radio"
                         name="gender"
                         value="female"
+                        checked={inputs.gender === "female"}
+                        onChange={(e) =>
+                          setInputs({ ...inputs, gender: e.target.value })
+                        }
                       />
                       <span className="ml-2 text-white">Female</span>
                     </label>
                   </div>
                 </div>
+
                 <button
                   type="submit"
                   className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >
                   Signup
                 </button>
-                <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                <Link
+                  to="/login"
+                  className="text-sm font-light text-gray-500 dark:text-gray-400"
+                >
                   Don’t have an account yet?{" "}
                   <a
                     href="#"
@@ -165,7 +212,7 @@ const Signup = () => {
                   >
                     Login
                   </a>
-                </p>
+                </Link>
               </form>
             </div>
           </div>

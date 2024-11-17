@@ -1,11 +1,22 @@
 import React, { useState } from "react";
 import { Eye, EyeOff, Mail } from "lucide-react";
 import logo from "../../assets/logo.png";
+import { Link } from "react-router-dom";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   function togglePasswordVisibility() {
     setShowPassword((prevState) => !prevState);
+  }
+
+  const [inputs,setInputs]=useState({
+    username:"",
+    password:"",
+  })
+
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    console.log(inputs);
   }
   return (
     <div>
@@ -23,22 +34,23 @@ const Login = () => {
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Login to your account
               </h1>
-              <form class="space-y-4 md:space-y-6" action="#">
+              <form class="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                 <div>
                   <label
-                    htmlFor="email"
+                    htmlFor="username"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Your email
+                  >Username
                   </label>
                   <div className="relative">
                     <input
-                      type="email"
-                      name="email"
-                      id="email"
+                      type="username"
+                      name="username"
+                      id="username"  
                       className="bg-zinc-700 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="name@company.com"
+                      placeholder="JohnDoe"
                       required
+                      value={inputs.username}
+                      onChange={(e)=>setInputs({...inputs,username:e.target.value})}
                     />
                     <Mail className="absolute inset-y-0 right-0 flex items-center cursor-pointer mr-2 mt-3 text-gray-400"></Mail>
                   </div>
@@ -58,6 +70,8 @@ const Login = () => {
                       placeholder="••••••••"
                       className="border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-zinc-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       required
+                      value={inputs.password}
+                      onChange={(e)=>setInputs({...inputs,password:e.target.value})}
                     />
                     <div
                       className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
@@ -78,7 +92,7 @@ const Login = () => {
                 >
                   Login
                 </button>
-                <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                <Link to='/signup' class="text-sm font-light text-gray-500 dark:text-gray-400">
                   Don’t have an account yet?{" "}
                   <a
                     href="#"
@@ -86,7 +100,7 @@ const Login = () => {
                   >
                     Sign up
                   </a>
-                </p>
+                </Link>
               </form>
             </div>
           </div>

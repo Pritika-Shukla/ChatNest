@@ -1,19 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Login from './pages/login/Login'
-import Signup from './pages/signup/SignUp'
-import SearchInput from './components/sidebar/SearchInput'
-import Home from './pages/home/Home'
-import GlobeDemo from './pages/GlobeDemo'
-
+import { Routes,Route } from "react-router-dom"
+import  Home from "./pages/home/Home"
+import Login from "./pages/login/Login"
+import SignUp from "./pages/signup/SignUp"
+import { Toaster } from "react-toastify";
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
-<Home/>
-  
+
+  <><Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/login" element={<Login />} />
+    </Routes>
+   <Toaster/>
+    </>
   )
 }
 
