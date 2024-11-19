@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { Eye, EyeOff, Mail, UserRoundPen } from "lucide-react";
 import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
+import useSignup from "../../hooks/useSignup";
+import Loader from "../../components/Loader";
 
 const Signup = () => {
+  const {loading, signup } = useSignup();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -22,11 +25,10 @@ const Signup = () => {
     gender: "",
   });
 
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-    console.log(inputs);
-    await signup(inputs)
-  };
+  const handleSubmit = async (e) => {
+		e.preventDefault();
+		await signup(inputs);
+	};
   return (
     <div>
       <section className="bg-zinc-950">
@@ -62,7 +64,7 @@ const Signup = () => {
                       id="name"
                       className="bg-zinc-700 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Enter your fullname"
-                      required
+                      
                       value={inputs.fullName}
                       onChange={(e) =>
                         setInputs({ ...inputs, fullName: e.target.value })
@@ -85,7 +87,7 @@ const Signup = () => {
                       id="username"
                       className="bg-zinc-700 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="JohnDoe"
-                      required
+                      
                       value={inputs.username}
                       onChange={(e) =>
                         setInputs({ ...inputs, username: e.target.value })
@@ -108,7 +110,7 @@ const Signup = () => {
                       id="password"
                       placeholder="••••••••"
                       className="border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-zinc-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      required
+                      
                       value={inputs.password}
                       onChange={(e) =>
                         setInputs({ ...inputs, password: e.target.value })
@@ -140,7 +142,6 @@ const Signup = () => {
                       id="confirm-password"
                       placeholder="••••••••"
                       className="border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-zinc-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      required
                       value={inputs.confirmPassword}
                       onChange={(e) =>
                         setInputs({
@@ -198,8 +199,9 @@ const Signup = () => {
                 <button
                   type="submit"
                   className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                >
-                  Signup
+          disabled={loading}
+            >
+           {loading ? <Loader/> :"Signup"}
                 </button>
                 <Link
                   to="/login"

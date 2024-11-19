@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Eye, EyeOff, Mail } from "lucide-react";
 import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
+import useLogin  from "../../hooks/useLogin"
+import Loader from "../../components/Loader";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-
+const {loading,login}=useLogin()
   function togglePasswordVisibility() {
     setShowPassword((prevState) => !prevState);
   }
@@ -14,8 +16,9 @@ const Login = () => {
     password:"",
   })
 
-  const handleSubmit=(e)=>{
+  const handleSubmit=async(e)=>{
     e.preventDefault();
+   await login(inputs)
     console.log(inputs);
   }
   return (
@@ -34,7 +37,7 @@ const Login = () => {
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Login to your account
               </h1>
-              <form class="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+              <form class="space-y-4 md:space-y-6" onSubmit={handleSubmit }>
                 <div>
                   <label
                     htmlFor="username"
@@ -89,8 +92,9 @@ const Login = () => {
                 <button
                   type="submit"
                   class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                >
-                  Login
+               disabled={loading}
+               >
+               {loading? <Loader/>: "Login"}
                 </button>
                 <Link to='/signup' class="text-sm font-light text-gray-500 dark:text-gray-400">
                   Don’t have an account yet?{" "}
