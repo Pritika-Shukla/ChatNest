@@ -6,7 +6,7 @@ import useLogin  from "../../hooks/useLogin"
 import Loader from "../../components/Loader";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-const {loading,login}=useLogin()
+const {loading, login}=useLogin()
   function togglePasswordVisibility() {
     setShowPassword((prevState) => !prevState);
   }

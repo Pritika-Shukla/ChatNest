@@ -6,7 +6,9 @@ const useLogin = () => {
     const [loading, setLoading] = useState(false);
     const { setAuthUser } = useAuthContext();
 
-    const login = async (username, password) => {
+    const login = async ({username, password}) => {
+        const success=handleInputError({username, password});
+        if(!success)return;
         setLoading(true);
         try {
             const res = await fetch("/api/auth/login", {
@@ -19,7 +21,7 @@ const useLogin = () => {
                 throw new Error(data.error);
             }
             localStorage.setItem("auth-User",JSON.stringify(data))
-            setAuthUser(data.user);
+            setAuthUser(data);
             toast.success("Login successful!");
         } catch (error) {
             toast.error(error.message);
@@ -32,3 +34,14 @@ const useLogin = () => {
 };
 
 export default useLogin;
+
+function handleInputError({
+    username,
+    password,
+}){
+    if(!username || !password){
+        toast.error("Please fill all required fields")
+        return false
+    }
+    return true
+}
