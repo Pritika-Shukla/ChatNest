@@ -1,18 +1,23 @@
-import React from 'react'
-import Conversation from './Conversation'
+import React from "react";
+import Conversation from "./Conversation";
+import useGetConversation from "../../hooks/useGetConversation";
+import Loader from "../Loader";
 
 const Conversations = () => {
+  const { loading, conversations } = useGetConversation();
+
   return (
     <div>
-      <Conversation/>
-      <Conversation/>
-      <Conversation/>
-      <Conversation/>
-     
-      <Conversation/>
+      {loading ? <Loader /> : null}
 
+      {conversations.map((conversation, idx) => (
+        <Conversation
+          key={conversation._id} 
+          lastIdx={idx === conversations.length - 1}
+        />
+      ))}
     </div>
-  )
-}
+  );
+};
 
-export default Conversations
+export default Conversations;
