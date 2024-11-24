@@ -1,6 +1,5 @@
 import React from 'react'
 import SearchInput from './SearchInput'
-import Logout from '../messages/Logout'
 import Conversations from './Conversations'
 
 const LeftSidebar = () => {

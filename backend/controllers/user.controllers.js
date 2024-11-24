@@ -10,19 +10,3 @@ export const getUsersForSidebar = async (req, res) => {
     res.status(500).send("Server Error");
   }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { World } from "../components/ui/Globe";
+import { World } from "./ui/Globe";
 
 export function GlobeDemo() {
   const globeConfig = {

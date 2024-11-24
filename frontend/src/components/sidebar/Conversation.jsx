@@ -3,10 +3,9 @@ import React from 'react';
 import logo from "../../assets/logo.png";
 
 const Conversation = ({ conversation, idx }) => {
-  // Check if conversation is defined
-//   if (!conversation) {
-//     return <div>Loading...</div>; // or return null or a fallback UI
-//   }
+  if (!conversation) {
+    return <div>Loading...</div>; 
+  }
 
   return (
     <>
@@ -15,7 +14,7 @@ const Conversation = ({ conversation, idx }) => {
         <div className="relative w-12 h-12 flex-shrink-0">
           <div className="w-full h-full rounded-full overflow-hidden border-2 border-gray-500/30">
             <img
-              src={logo}
+              src={conversation.profilePic}
               alt="Profile"
               className="w-full h-full object-cover"
             />
@@ -27,16 +26,18 @@ const Conversation = ({ conversation, idx }) => {
           <div className="flex justify-between items-start">
             {/* Name */}
             <div className="text-gray-100 font-medium text-base">
-              {conversation?.username}
+              {conversation?.fullName}
             </div>
             {/* Time */}
-            <div className="text-gray-500 text-xs">10:36 am</div>
+            <div className="text-gray-500 text-xs">
+  {new Date(conversation.updatedAt).toLocaleString()}
+</div>
           </div>
 
           {/* Last Message */}
           <div className="flex items-center gap-1 mt-0.5">
-            <Check className="w-4 h-4 text-teal-500" />
-            <span className="text-gray-400 text-sm truncate">AWS</span>
+            {/* <Check className="w-4 h-4 text-teal-500" /> */}
+            <span className="text-gray-400 text-sm truncate">{}</span>
           </div>
         </div>
       </div>
