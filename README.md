@@ -18,4 +18,4 @@ A real-time chatting application designed for seamless communication, built with
 ## How to Run
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/chatting-app.git
+   git clone https://github.com/Pritika-Shukla/ChatNest.git
